@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\ChargePoint\Domain\Model;
+namespace MyPlugPlanner\IberdrolaApi\ChargePoint\Domain\Model;
 
-use App\ChargePoint\Domain\Model\Event\ChargePointCreated;
-use App\ChargePoint\Domain\Model\ValueObject\Id;
-use App\Shared\Domain\Model\DomainModel;
+use MyPlugPlanner\IberdrolaApi\ChargePoint\Domain\Model\Event\ChargePointCreated;
+use MyPlugPlanner\IberdrolaApi\ChargePoint\Domain\Model\ValueObject\Id;
+use MyPlugPlanner\Shared\Domain\Model\DomainModel;
 use PcComponentes\Ddd\Domain\Model\ValueObject\DateTimeValueObject;
 use PcComponentes\Ddd\Domain\Model\ValueObject\Uuid;
 use PcComponentes\Ddd\Util\Message\ValueObject\AggregateId;

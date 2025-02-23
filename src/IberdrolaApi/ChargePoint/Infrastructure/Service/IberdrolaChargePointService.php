@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\ChargePoint\Infrastructure\Service;
+namespace MyPlugPlanner\IberdrolaApi\ChargePoint\Infrastructure\Service;
 
+use MyPlugPlanner\IberdrolaApi\ChargePoint\Domain\Service\ChargePointService;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
-use App\ChargePoint\Domain\Service\ChargePointService;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 final class IberdrolaChargePointService implements ChargePointService
 {

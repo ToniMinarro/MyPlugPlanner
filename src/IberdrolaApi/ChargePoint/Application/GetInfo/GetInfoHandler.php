@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\ChargePoint\Application\GetInfo;
+namespace MyPlugPlanner\IberdrolaApi\ChargePoint\Application\GetInfo;
 
-use App\ChargePoint\Domain\Service\ChargePointService;
+use MyPlugPlanner\IberdrolaApi\ChargePoint\Domain\Service\ChargePointService;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]

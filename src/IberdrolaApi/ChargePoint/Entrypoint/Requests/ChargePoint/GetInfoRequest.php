@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\ChargePoint\Entrypoint\Requests\ChargePoint;
+namespace MyPlugPlanner\IberdrolaApi\ChargePoint\Entrypoint\Requests\ChargePoint;
 
+use MyPlugPlanner\Shared\Infrastructure\Entrypoint\Requests\BaseRequest;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Shared\Infrastructure\Entrypoint\Requests\BaseRequest;
 
 final class GetInfoRequest extends BaseRequest
 {

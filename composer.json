@@ -58,12 +58,12 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "MyPlugPlanner\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "MyPlugPlanner\\Tests\\": "tests/"
         }
     },
     "replace": {

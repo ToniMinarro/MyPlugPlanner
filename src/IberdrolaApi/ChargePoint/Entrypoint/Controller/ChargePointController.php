@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\ChargePoint\Entrypoint\Controller;
+namespace MyPlugPlanner\IberdrolaApi\ChargePoint\Entrypoint\Controller;
 
-use Symfony\Component\Messenger\HandleTrait;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use MyPlugPlanner\IberdrolaApi\ChargePoint\Application\GetInfo\GetInfoQuery;
+use MyPlugPlanner\IberdrolaApi\ChargePoint\Entrypoint\Requests\ChargePoint\GetInfoRequest;
 use PcComponentes\Ddd\Domain\Model\ValueObject\Uuid;
-use Symfony\Component\Messenger\MessageBusInterface;
-use App\ChargePoint\Application\GetInfo\GetInfoQuery;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\ChargePoint\Entrypoint\Requests\ChargePoint\GetInfoRequest;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\HandleTrait;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class ChargePointController extends AbstractController
 {

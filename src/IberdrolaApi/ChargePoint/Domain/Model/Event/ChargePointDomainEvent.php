@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\ChargePoint\Domain\Model\Event;
+namespace MyPlugPlanner\IberdrolaApi\ChargePoint\Domain\Model\Event;
 
 interface ChargePointDomainEvent
 {

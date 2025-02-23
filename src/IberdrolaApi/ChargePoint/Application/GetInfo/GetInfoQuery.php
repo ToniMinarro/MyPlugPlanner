@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\ChargePoint\Application\GetInfo;
+namespace MyPlugPlanner\IberdrolaApi\ChargePoint\Application\GetInfo;
 
-use App\Shared\Domain\CompanyName;
-use App\Shared\Domain\ServiceName;
-use PcComponentes\TopicGenerator\Topic;
+use MyPlugPlanner\IberdrolaApi\ChargePoint\Domain\Model\ChargePoint;
+use MyPlugPlanner\Shared\Domain\CompanyName;
+use MyPlugPlanner\Shared\Domain\ServiceName;
 use PcComponentes\Ddd\Application\Query;
-use App\ChargePoint\Domain\Model\ChargePoint;
+use PcComponentes\TopicGenerator\Topic;
 
 final class GetInfoQuery extends Query
 {

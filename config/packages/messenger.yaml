@@ -26,4 +26,4 @@ framework:
             Symfony\Component\Mailer\Messenger\SendEmailMessage: async
 
             # Route your messages to the transports
-            # 'App\Message\YourMessage': async
+            # 'MyPlugPlanner\Message\YourMessage': async

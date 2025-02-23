@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\ChargePoint\Domain\Model\Event;
+namespace MyPlugPlanner\IberdrolaApi\ChargePoint\Domain\Model\Event;
 
-use App\Shared\Domain\CompanyName;
-use App\Shared\Domain\ServiceName;
-use PcComponentes\TopicGenerator\Topic;
-use App\ChargePoint\Domain\Model\ChargePoint;
+use MyPlugPlanner\IberdrolaApi\ChargePoint\Domain\Model\ChargePoint;
+use MyPlugPlanner\Shared\Domain\CompanyName;
+use MyPlugPlanner\Shared\Domain\ServiceName;
 use PcComponentes\Ddd\Domain\Model\DomainEvent;
+use PcComponentes\TopicGenerator\Topic;
 
 final class ChargePointCreated extends DomainEvent implements ChargePointDomainEvent
 {

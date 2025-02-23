@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Infrastructure\Entrypoint\Requests;
+namespace MyPlugPlanner\Shared\Infrastructure\Entrypoint\Requests;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
