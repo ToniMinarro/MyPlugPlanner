@@ -53,8 +53,6 @@ abstract class BaseRequest implements \JsonSerializable
         ];
 
         new JsonResponse($messages, Response::HTTP_BAD_REQUEST)->send();
-
-        exit;
     }
 
     public function getPayload(): array
