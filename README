@@ -1,0 +1,35 @@
+appuser/getPaymentMethod
+
+curl -H 'Authorization: Bearer rdUCWU' -H 'versionApp: ANDROID-4.28.5' -H 'Plataforma: Android' -H 'User-Agent: Iberdrola/4.28.5/Dalvik/2.1.0 (Linux; U; Android 13; M2101K6G Build/TKQ1.221013.002)' -H 'Accept: application/json' -H 'c-rid: 197840-32e-e84-3d3-cc8cacfb1' -H 'deviceid: cb5cfa93-db33-49c4-9a54-0b308de392e5' -H 'Content-Type: application/json; charset=UTF-8' -H 'Connection: Keep-Alive' --compressed -H 'Accept-Language: en' -X POST https://eva.iberdrola.com/vecomges/api/appuser/getPaymentMethod -d '{"expired":false}'
+
+payment/getOrderId?id=1
+
+curl -H 'Authorization: Bearer rdUCWU' -H 'versionApp: ANDROID-4.28.5' -H 'Plataforma: Android' -H 'User-Agent: Iberdrola/4.28.5/Dalvik/2.1.0 (Linux; U; Android 13; M2101K6G Build/TKQ1.221013.002)' -H 'Accept: application/json' -H 'c-rid: 197840-32e-e84-3d3-cc8cacfb1' -H 'deviceid: cb5cfa93-db33-49c4-9a54-0b308de392e5' -H 'Content-Type: application/json; charset=UTF-8' -H 'Connection: Keep-Alive' --compressed -H 'Accept-Language: en' -X POST 'https://eva.iberdrola.com/vecomges/api/payment/getOrderId?id=1' -d '{"amount":1.0,"cuprId":12543,"isPrInteroperable":false,"movementType":1,"physicalSocketId":116228}'
+
+appchargepoint/listChargePoints
+
+curl -H 'Authorization: Bearer rdUCWU' -H 'versionApp: ANDROID-4.28.5' -H 'Plataforma: Android' -H 'User-Agent: Iberdrola/4.28.5/Dalvik/2.1.0 (Linux; U; Android 13; M2101K6G Build/TKQ1.221013.002)' -H 'Accept: application/json' -H 'c-rid: 197840-32e-e84-3d3-cc8cacfb1' -H 'deviceid: cb5cfa93-db33-49c4-9a54-0b308de392e5' -H 'Content-Type: application/json; charset=UTF-8' -H 'Connection: Keep-Alive' --compressed -H 'Accept-Language: en' -X POST https://eva.iberdrola.com/vecomges/api/appchargepoint/listChargePoints -d '{"advantageous":false,"chargePointTypesCodes":[],"connectorsType":[],"favoriteInd":false,"latitudeMax":37.680610219291324,"latitudeMin":37.680276145744635,"loadSpeed":[],"longitudeMax":-1.6872871667146683,"longitudeMin":-1.6875503584742546,"parkingRestrictionsList":[],"socketStatus":[]}'
+
+appuser/getUserData
+
+curl -H 'Authorization: Bearer rdUCWU' -H 'versionApp: ANDROID-4.28.5' -H 'Plataforma: Android' -H 'User-Agent: Iberdrola/4.28.5/Dalvik/2.1.0 (Linux; U; Android 13; M2101K6G Build/TKQ1.221013.002)' -H 'Accept: application/json' -H 'c-rid: 197840-32e-e84-3d3-cc8cacfb1' -H 'deviceid: cb5cfa93-db33-49c4-9a54-0b308de392e5' -H 'Connection: Keep-Alive' --compressed -H 'Accept-Language: en' -X POST https://eva.iberdrola.com/vecomges/api/appuser/getUserData
+
+ocpp/remoteStartTransaction
+
+curl -H 'Authorization: Bearer rdUCWU' -H 'versionApp: ANDROID-4.28.5' -H 'Plataforma: Android' -H 'User-Agent: Iberdrola/4.28.5/Dalvik/2.1.0 (Linux; U; Android 13; M2101K6G Build/TKQ1.221013.002)' -H 'Accept: application/json' -H 'c-rid: 197840-32e-e84-3d3-cc8cacfb1' -H 'deviceid: cb5cfa93-db33-49c4-9a54-0b308de392e5' -H 'Content-Type: application/json; charset=UTF-8' -H 'Connection: Keep-Alive' --compressed -H 'Accept-Language: en' -X POST https://eva.iberdrola.com/vecomges/api/ocpp/remoteStartTransaction -d '{"cuprId":12543,"orderId":"","physicalSocketId":116228,"rechargeAmount":0.0}'
+
+appconnector/connectionStatus
+
+curl -H 'Authorization: Bearer rdUCWU' -H 'versionApp: ANDROID-4.28.5' -H 'Plataforma: Android' -H 'User-Agent: Iberdrola/4.28.5/Dalvik/2.1.0 (Linux; U; Android 13; M2101K6G Build/TKQ1.221013.002)' -H 'Accept: application/json' -H 'c-rid: 197840-32e-e84-3d3-cc8cacfb1' -H 'deviceid: cb5cfa93-db33-49c4-9a54-0b308de392e5' -H 'Content-Type: application/json; charset=UTF-8' -H 'Connection: Keep-Alive' --compressed -H 'Accept-Language: en' -X POST https://eva.iberdrola.com/vecomges/api/appconnector/connectionStatus -d '{"cuprId":12543,"physicalSocketId":116228}'
+
+appuseroperation/getTransactionInProgress
+
+curl -H 'Authorization: Bearer rdUCWU' -H 'versionApp: ANDROID-4.28.5' -H 'Plataforma: Android' -H 'User-Agent: Iberdrola/4.28.5/Dalvik/2.1.0 (Linux; U; Android 13; M2101K6G Build/TKQ1.221013.002)' -H 'Accept: application/json' -H 'c-rid: 197840-32e-e84-3d3-cc8cacfb1' -H 'deviceid: cb5cfa93-db33-49c4-9a54-0b308de392e5' -H 'Connection: Keep-Alive' --compressed -H 'Accept-Language: en' -X POST https://eva.iberdrola.com/vecomges/api/appuseroperation/getTransactionInProgress
+
+appchargepoint/getChargePoint
+
+curl -H 'Authorization: Bearer rdUCWU' -H 'versionApp: ANDROID-4.28.5' -H 'Plataforma: Android' -H 'User-Agent: Iberdrola/4.28.5/Dalvik/2.1.0 (Linux; U; Android 13; M2101K6G Build/TKQ1.221013.002)' -H 'Accept: application/json' -H 'c-rid: 1fc5a2-895-175-095-2f6f2f20a' -H 'deviceid: cb5cfa93-db33-49c4-9a54-0b308de392e5' -H 'Content-Type: application/json; charset=UTF-8' -H 'Connection: Keep-Alive' --compressed -H 'Accept-Language: en' -X POST https://eva.iberdrola.com/vecomges/api/appchargepoint/getChargePoint -d '{"cuprId":[11680]}'
+
+appchargepoint/listChargePoints
+
+curl -H 'Authorization: Bearer rdUCWU' -H 'versionApp: ANDROID-4.28.5' -H 'Plataforma: Android' -H 'User-Agent: Iberdrola/4.28.5/Dalvik/2.1.0 (Linux; U; Android 13; M2101K6G Build/TKQ1.221013.002)' -H 'Accept: application/json' -H 'c-rid: 1fc5a2-895-175-095-2f6f2f20a' -H 'deviceid: cb5cfa93-db33-49c4-9a54-0b308de392e5' -H 'Content-Type: application/json; charset=UTF-8' -H 'Connection: Keep-Alive' --compressed -H 'Accept-Language: en' -X POST https://eva.iberdrola.com/vecomges/api/appchargepoint/listChargePoints -d '{"advantageous":false,"chargePointTypesCodes":[],"connectorsType":[],"favoriteInd":false,"latitudeMax":37.680632243149795,"latitudeMin":37.68029816970229,"loadSpeed":[],"longitudeMax":-1.6872871667146683,"longitudeMin":-1.6875503584742546,"parkingRestrictionsList":[],"socketStatus":[]}'

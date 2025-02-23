@@ -1,0 +1,5 @@
+charge_point:
+    resource: 'routes/context/charge_point.routes.yaml'
+    prefix: /api/v1/charge-point
+    type: yaml
+    trailing_slash_on_root: false
