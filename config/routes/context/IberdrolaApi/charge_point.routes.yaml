@@ -1,4 +1,0 @@
-get_charge_point_info:
-    path: /{chargePointId}
-    controller: MyPlugPlanner\IberdrolaApi\ChargePoint\Entrypoint\Controller\ChargePointController::getInfo
-    methods: GET

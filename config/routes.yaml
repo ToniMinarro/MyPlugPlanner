@@ -1,5 +1,3 @@
-charge_point:
-    resource: 'routes/context/IberdrolaApi/charge_point.routes.yaml'
-    prefix: /api/v1/charge-point
-    type: yaml
-    trailing_slash_on_root: false
+controllers:
+    resource: '../src/IberdrolaApi/ChargePoint/Entrypoint/Controller'
+    type: attribute
