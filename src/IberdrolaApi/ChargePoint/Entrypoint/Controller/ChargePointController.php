@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use MyPlugPlanner\IberdrolaApi\ChargePoint\Application\GetInfo\GetInfoQuery;
 use MyPlugPlanner\IberdrolaApi\ChargePoint\Entrypoint\Requests\ChargePoint\GetInfoRequest;
 
-#[Route('/api/v1/charge-point')]
+#[Route(path: '/api/v1/charge-point', name: 'api_charge_point_')]
 class ChargePointController extends AbstractController
 {
     use HandleTrait;
@@ -24,7 +24,7 @@ class ChargePointController extends AbstractController
         $this->messageBus = $executeQueryMessage;
     }
 
-    #[Route('/{chargePointId}', methods: ['GET'])]
+    #[Route(path: '/{chargePointId}', name: 'get_info', methods: ['GET'])]
     public function getInfo(GetInfoRequest $request): JsonResponse
     {
         $query = GetInfoQuery::fromPayload(Uuid::v4(), $request->getPayload());
