@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MyPlugPlanner\IberdrolaApi\ChargePoint\Domain\Service;
+namespace IberdrolaApi\ChargePoint\Domain\Service;
 
 interface ChargePointService
 {

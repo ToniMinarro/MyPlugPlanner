@@ -1,0 +1,17 @@
+### SANTA CLARA
+GET {{host}}/charge-point/98807
+
+### SAN FERNANDO
+GET {{host}}/charge-point/12562
+
+### SAN DIEGO
+GET {{host}}/charge-point/11680
+
+### AVENIDA EUROPA
+GET {{host}}/charge-point/12543
+
+### LA MERCED
+GET {{host}}/charge-point/166569
+
+### SANTA QUITERIA
+GET {{host}}/charge-point/166587

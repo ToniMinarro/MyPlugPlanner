@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MyPlugPlanner\Shared\Domain;
+namespace Shared\Domain;
 
 use PcComponentes\TopicGenerator\Service;
 

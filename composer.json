@@ -58,12 +58,18 @@
     },
     "autoload": {
         "psr-4": {
-            "MyPlugPlanner\\": "src/"
+            "App\\": "src/",
+            "IberdrolaApi\\": "src/IberdrolaApi/",
+            "MyPlugPlanner\\": "src/MyPlugPlanner/",
+            "Shared\\": "src/Shared"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "MyPlugPlanner\\Tests\\": "tests/"
+            "App\\": "tests/",
+            "MyPlugPlanner\\Tests\\": "tests/MyPlugPlanner",
+            "IberdrolaApi\\Tests\\": "tests/IberdrolaApi",
+            "Shared\\Tests\\": "tests/Shared"
         }
     },
     "replace": {

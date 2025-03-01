@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MyPlugPlanner\IberdrolaApi\ChargePoint\Domain\Model\ValueObject;
+namespace IberdrolaApi\ChargePoint\Domain\Model\ValueObject;
 
 use PcComponentes\Ddd\Domain\Model\ValueObject\IntValueObject;
 

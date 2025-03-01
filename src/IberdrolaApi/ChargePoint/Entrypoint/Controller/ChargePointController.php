@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace MyPlugPlanner\IberdrolaApi\ChargePoint\Entrypoint\Controller;
+namespace IberdrolaApi\ChargePoint\Entrypoint\Controller;
 
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Messenger\MessageBusInterface;
 use PcComponentes\Ddd\Domain\Model\ValueObject\Uuid;
+use Symfony\Component\Messenger\MessageBusInterface;
+use IberdrolaApi\ChargePoint\Application\GetInfo\GetInfoQuery;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use MyPlugPlanner\IberdrolaApi\ChargePoint\Application\GetInfo\GetInfoQuery;
-use MyPlugPlanner\IberdrolaApi\ChargePoint\Entrypoint\Requests\ChargePoint\GetInfoRequest;
+use IberdrolaApi\ChargePoint\Entrypoint\Requests\ChargePoint\GetInfoRequest;
 
 #[Route(path: '/api/v1/charge-point', name: 'api_charge_point_')]
 class ChargePointController extends AbstractController

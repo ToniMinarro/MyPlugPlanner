@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace MyPlugPlanner\IberdrolaApi\ChargePoint\Entrypoint\Requests\ChargePoint;
+namespace IberdrolaApi\ChargePoint\Entrypoint\Requests\ChargePoint;
 
-use MyPlugPlanner\Shared\Infrastructure\Entrypoint\Requests\BaseRequest;
+use IberdrolaApi\ChargePoint\Domain\Model\IberdrolaApiRequestInterface;
+use Shared\Infrastructure\Entrypoint\Requests\BaseRequest;
 use Symfony\Component\Validator\Constraints as Assert;
 
-final class GetInfoRequest extends BaseRequest
+readonly final class GetInfoRequest extends BaseRequest implements IberdrolaApiRequestInterface
 {
     #[Assert\NotBlank, Assert\Type('numeric')]
     protected(set) mixed $chargePointId;

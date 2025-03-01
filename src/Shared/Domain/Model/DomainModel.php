@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MyPlugPlanner\Shared\Domain\Model;
+namespace Shared\Domain\Model;
 
 use JsonSerializable;
 use PcComponentes\Ddd\Domain\Model\DomainEvent;

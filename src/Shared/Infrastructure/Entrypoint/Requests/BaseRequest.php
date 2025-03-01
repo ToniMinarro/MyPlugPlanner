@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace MyPlugPlanner\Shared\Infrastructure\Entrypoint\Requests;
+namespace Shared\Infrastructure\Entrypoint\Requests;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-abstract class BaseRequest implements \JsonSerializable
+abstract readonly class BaseRequest implements \JsonSerializable
 {
     public function __construct(
-        private readonly Request $request,
-        private readonly ValidatorInterface $validator,
+        private Request $request,
+        private ValidatorInterface $validator,
     ) {
         $this->populate();
         if ($this->autoValidateRequest()) {

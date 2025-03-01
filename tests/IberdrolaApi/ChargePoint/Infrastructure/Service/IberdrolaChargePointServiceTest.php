@@ -1,14 +1,13 @@
 <?php
 declare(strict_types=1);
-
-namespace MyPlugPlanner\Tests\IberdrolaApi\ChargePoint\Infrastructure\Service;
+namespace IberdrolaApi\Tests\ChargePoint\Infrastructure\Service;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-use MyPlugPlanner\IberdrolaApi\ChargePoint\Domain\Service\ChargePointService;
-use MyPlugPlanner\IberdrolaApi\ChargePoint\Infrastructure\Service\IberdrolaChargePointService;
+use IberdrolaApi\ChargePoint\Domain\Service\ChargePointService;
+use IberdrolaApi\ChargePoint\Infrastructure\Service\IberdrolaChargePointService;
 
 final class IberdrolaChargePointServiceTest extends TestCase
 {

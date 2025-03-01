@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MyPlugPlanner\IberdrolaApi\ChargePoint\Application\GetInfo;
+namespace IberdrolaApi\ChargePoint\Application\GetInfo;
 
-use MyPlugPlanner\IberdrolaApi\ChargePoint\Domain\Service\ChargePointService;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use IberdrolaApi\ChargePoint\Domain\Service\ChargePointService;
 
 #[AsMessageHandler]
 readonly class GetInfoHandler
