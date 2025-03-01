@@ -17,14 +17,7 @@
 /public/assets/
 /assets/vendor/
 ###< symfony/asset-mapper ###
-/.idea/php.xml
-/.idea/workspace.xml
-/.idea/vcs.xml
 /jwt_public_key
 /jwt_secret_key
-/.idea/.gitignore
-/.idea/modules.xml
-/.idea/phpunit.xml
-/.idea/MyPlugPlanner.iml
-/.idea/symfony2.xml
 /composer.phar
+/.idea

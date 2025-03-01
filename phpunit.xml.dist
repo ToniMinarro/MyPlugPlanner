@@ -25,6 +25,13 @@
         <include>
             <directory suffix=".php">src</directory>
         </include>
+        <report>
+            <clover outputFile="var/report/unit/clover/coverage.xml"/>
+            <html outputDirectory="var/report/html" lowUpperBound="35" highLowerBound="70"/>
+            <xml outputDirectory="var/report/coverage-xml"/>
+            <text outputFile="php://stdout" showOnlySummary="true"/>
+            <php outputFile="var/report/cov/unit.cov"/>
+        </report>
     </coverage>
 
     <listeners>
