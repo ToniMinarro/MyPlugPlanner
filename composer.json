@@ -58,18 +58,16 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/",
+            "Shared\\": "src/Shared/",
             "IberdrolaApi\\": "src/IberdrolaApi/",
-            "MyPlugPlanner\\": "src/MyPlugPlanner/",
-            "Shared\\": "src/Shared"
+            "MyPlugPlanner\\": "src/MyPlugPlanner/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\": "tests/",
-            "MyPlugPlanner\\Tests\\": "tests/MyPlugPlanner",
-            "IberdrolaApi\\Tests\\": "tests/IberdrolaApi",
-            "Shared\\Tests\\": "tests/Shared"
+            "Shared\\Tests\\": "tests/Shared/",
+            "IberdrolaApi\\Tests\\": "tests/IberdrolaApi/",
+            "MyPlugPlanner\\Tests\\": "tests/MyPlugPlanner/"
         }
     },
     "replace": {
@@ -105,6 +103,8 @@
         }
     },
     "require-dev": {
+        "behat/behat": "^3.19",
+        "pccomponentes/open-api-messaging-context": "^3.3",
         "phpunit/phpunit": "^9.6.22",
         "symfony/browser-kit": "7.3.*",
         "symfony/css-selector": "7.3.*",

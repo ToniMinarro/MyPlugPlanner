@@ -1,0 +1,17 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    Shared\Tests\Behat\:
+        resource: '../tests/Shared/Behat/*'
+
+    Shared\Kernel:
+        class: Shared\Kernel
+        arguments:
+            $environment: 'test'
+            $debug: true
+
+    PcComponentes\OpenApiMessagingContext\Utils\RequestHistory:
+        class: PcComponentes\OpenApiMessagingContext\Utils\RequestHistory
+        public: true
