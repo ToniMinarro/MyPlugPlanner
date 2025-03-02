@@ -1,0 +1,15 @@
+default:
+  suites:
+    api:
+      paths:
+        - tests/IberdrolaApi/ChargePoint/Entrypoint/features/api
+      contexts:
+        - Shared\Tests\Behat\FeatureContext
+        - Shared\Tests\Behat\RestContext
+
+  extensions:
+    FriendsOfBehat\SymfonyExtension:
+      bootstrap: config/bootstrap.php
+      kernel:
+        class: Shared\Kernel
+        environment: test
