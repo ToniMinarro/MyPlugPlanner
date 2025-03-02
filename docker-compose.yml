@@ -32,8 +32,10 @@ services:
         environment:
             - XDEBUG_CONFIG=client_host=host.docker.internal
             - PHP_IDE_CONFIG=serverName=Test
+            - COMPOSER_CACHE_DIR=/composer/cache
         volumes:
             - '.:/var/www/html'
+            - './var/cache/composer:/composer/cache'
             - './docker/php/php-ini-overrides.ini:/etc/php/8.2/fpm/conf.d/99-overrides.ini'
         extra_hosts:
             - "host.docker.internal:host-gateway"

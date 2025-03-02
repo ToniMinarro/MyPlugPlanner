@@ -10,10 +10,10 @@
         "doctrine/dbal": "^3.9.4",
         "doctrine/doctrine-bundle": "^2.13.2",
         "doctrine/doctrine-migrations-bundle": "^3.4.1",
-        "pccomponentes/ddd": "^4.2",
-        "pccomponentes/topic-generator": "^2.0",
+        "pccomponentes/ddd": "^4.4",
+        "pccomponentes/topic-generator": "^2.0.1",
         "phpdocumentor/reflection-docblock": "^5.6.1",
-        "phpstan/phpdoc-parser": "^2.0",
+        "phpstan/phpdoc-parser": "^2.1",
         "symfony/asset": "7.3.*",
         "symfony/asset-mapper": "7.3.*",
         "symfony/console": "7.3.*",
@@ -36,16 +36,16 @@
         "symfony/runtime": "7.3.*",
         "symfony/security-bundle": "7.3.*",
         "symfony/serializer": "7.3.*",
-        "symfony/stimulus-bundle": "^2.22.1",
+        "symfony/stimulus-bundle": "^2.23.0",
         "symfony/string": "7.3.*",
         "symfony/translation": "7.3.*",
         "symfony/twig-bundle": "7.3.*",
-        "symfony/ux-turbo": "^2.22.1",
+        "symfony/ux-turbo": "^2.23.0",
         "symfony/validator": "7.3.*",
         "symfony/web-link": "7.3.*",
         "symfony/yaml": "7.3.*",
-        "twig/extra-bundle": "^2.12|^3.19",
-        "twig/twig": "^2.12|^3.19"
+        "twig/extra-bundle": "^2.12|^3.20",
+        "twig/twig": "^2.12|^3"
     },
     "config": {
         "allow-plugins": {
@@ -106,12 +106,14 @@
         "behat/behat": "^3.19",
         "pccomponentes/open-api-messaging-context": "^3.3",
         "phpunit/phpunit": "^9.6.22",
+        "rector/rector": "^2.0.9",
         "symfony/browser-kit": "7.3.*",
         "symfony/css-selector": "7.3.*",
         "symfony/debug-bundle": "7.3.*",
         "symfony/maker-bundle": "^1.62.1",
         "symfony/phpunit-bridge": "^7.2",
         "symfony/stopwatch": "7.3.*",
-        "symfony/web-profiler-bundle": "7.3.*"
+        "symfony/web-profiler-bundle": "7.3.*",
+        "symplify/easy-coding-standard": ">=12.5.8"
     }
 }
