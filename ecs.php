@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use PhpCsFixer\Fixer\ClassNotation\ClassAttributesSeparationFixer;
 use PhpCsFixer\Fixer\ControlStructure\YodaStyleFixer;
 use PhpCsFixer\Fixer\FunctionNotation\NativeFunctionInvocationFixer;
 use PhpCsFixer\Fixer\FunctionNotation\StaticLambdaFixer;
@@ -69,15 +68,5 @@ return static function (ECSConfig $ecsConfig): void {
 
     $ecsConfig->ruleWithConfiguration(PhpUnitMethodCasingFixer::class, [
         'case' => PhpUnitMethodCasingFixer::SNAKE_CASE,
-    ]);
-
-    $ecsConfig->ruleWithConfiguration(ClassAttributesSeparationFixer::class, [
-        'elements' => [
-            'property' => ClassAttributesSeparationFixer::SPACING_NONE,
-            'const' => ClassAttributesSeparationFixer::SPACING_NONE,
-            'method' => ClassAttributesSeparationFixer::SPACING_ONE,
-            'trait_import' => ClassAttributesSeparationFixer::SPACING_NONE,
-            'case' => ClassAttributesSeparationFixer::SPACING_NONE,
-        ],
     ]);
 };
