@@ -16,7 +16,7 @@ class ChargePointController extends AbstractController
     public function getInfoView(Request $request): Response
     {
         return $this->render(
-            'app/charge_point/get_info.html.twig',
+            'my_plug_planner/charge_point/get_info.html.twig',
             [
                 'chargePointId' => $request->get('chargePointId'),
             ],
