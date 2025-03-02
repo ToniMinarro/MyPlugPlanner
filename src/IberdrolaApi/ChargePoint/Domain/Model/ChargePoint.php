@@ -6,10 +6,10 @@ namespace IberdrolaApi\ChargePoint\Domain\Model;
 
 use IberdrolaApi\ChargePoint\Domain\Model\Event\ChargePointCreated;
 use IberdrolaApi\ChargePoint\Domain\Model\ValueObject\Id;
-use Shared\Domain\Model\DomainModel;
 use PcComponentes\Ddd\Domain\Model\ValueObject\DateTimeValueObject;
 use PcComponentes\Ddd\Domain\Model\ValueObject\Uuid;
 use PcComponentes\Ddd\Util\Message\ValueObject\AggregateId;
+use Shared\Domain\Model\DomainModel;
 
 final class ChargePoint extends DomainModel
 {
@@ -18,8 +18,7 @@ final class ChargePoint extends DomainModel
 
     protected function __construct(
         private(set) readonly Id $id,
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -61,7 +60,7 @@ final class ChargePoint extends DomainModel
     public function jsonSerialize(): array
     {
         return [
-            self::ID => $this->id
+            self::ID => $this->id,
         ];
     }
 }

@@ -8,7 +8,7 @@ use IberdrolaApi\ChargePoint\Domain\Model\IberdrolaApiRequestInterface;
 use Shared\Infrastructure\Entrypoint\Requests\BaseRequest;
 use Symfony\Component\Validator\Constraints as Assert;
 
-readonly final class GetInfoRequest extends BaseRequest implements IberdrolaApiRequestInterface
+final readonly class GetInfoRequest extends BaseRequest implements IberdrolaApiRequestInterface
 {
     #[Assert\NotBlank, Assert\Type('numeric')]
     protected(set) mixed $chargePointId;

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace IberdrolaApi\ChargePoint\Application\GetInfo;
 
+use IberdrolaApi\ChargePoint\Domain\Model\ChargePoint;
+use PcComponentes\Ddd\Application\Query;
+use PcComponentes\TopicGenerator\Topic;
 use Shared\Domain\CompanyName;
 use Shared\Domain\ServiceName;
-use PcComponentes\TopicGenerator\Topic;
-use PcComponentes\Ddd\Application\Query;
-use IberdrolaApi\ChargePoint\Domain\Model\ChargePoint;
 
 final class GetInfoQuery extends Query
 {
