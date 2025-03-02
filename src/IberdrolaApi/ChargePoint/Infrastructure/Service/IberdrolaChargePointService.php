@@ -5,18 +5,19 @@ declare(strict_types=1);
 namespace IberdrolaApi\ChargePoint\Infrastructure\Service;
 
 use Exception;
+use IberdrolaApi\ChargePoint\Domain\Service\ChargePointService;
+use RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
-use IberdrolaApi\ChargePoint\Domain\Service\ChargePointService;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-final class IberdrolaChargePointService implements ChargePointService
+final readonly class IberdrolaChargePointService implements ChargePointService
 {
     private const string GET_CONNECTION_POINT_INFO_ENDPOINT = '/o/webclipb/iberdrola/puntosrecargacontroller/getDatosPuntoRecarga';
 
     public function __construct(
-        private readonly HttpClientInterface $iberdrolaApiClient
+        private HttpClientInterface $iberdrolaApiClient
     ) {
     }
 
@@ -29,26 +30,24 @@ final class IberdrolaChargePointService implements ChargePointService
                 [
                     'json' => [
                         'dto' => [
-                            'cuprId' => [$chargePointId]
+                            'cuprId' => [$chargePointId],
                         ],
-                        'language' => 'es'
+                        'language' => 'es',
                     ],
                 ],
             );
 
             if ($request->getStatusCode() !== Response::HTTP_OK) {
-                throw new \RuntimeException("Error al conectar con Iberdrola: " . $request->getStatusCode());
+                throw new RuntimeException('Error al conectar con Iberdrola: ' . $request->getStatusCode());
             }
 
-            $response = json_decode(
+            return json_decode(
                 $request->getContent(),
                 true,
                 512,
                 JSON_THROW_ON_ERROR
             );
-
-            return $response;
-        } catch (Exception|TransportExceptionInterface $e) {
+        } catch (Exception|TransportExceptionInterface) {
             return [];
         }
     }

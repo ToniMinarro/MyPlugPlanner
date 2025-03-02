@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use function sprintf;
 
 final readonly class BaseRequestResolver implements ValueResolverInterface
 {
@@ -17,8 +18,9 @@ final readonly class BaseRequestResolver implements ValueResolverInterface
         IberdrolaApiRequestInterface::class,
     ];
 
-    public function __construct(private ValidatorInterface $validator)
-    {
+    public function __construct(
+        private ValidatorInterface $validator
+    ) {
     }
 
     public function resolve(Request $request, ArgumentMetadata $argument): iterable
@@ -29,7 +31,7 @@ final readonly class BaseRequestResolver implements ValueResolverInterface
 
         $className = $argument->getType();
         if (!class_exists($className)) {
-            throw new BadRequestException("Request class {$className} does not exist.");
+            throw new BadRequestException(sprintf('Request class %s does not exist.', $className));
         }
 
         yield new $className($request, $this->validator);

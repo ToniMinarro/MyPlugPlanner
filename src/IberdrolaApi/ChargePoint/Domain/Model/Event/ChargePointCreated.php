@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace IberdrolaApi\ChargePoint\Domain\Model\Event;
 
+use IberdrolaApi\ChargePoint\Domain\Model\ChargePoint;
+use PcComponentes\Ddd\Domain\Model\DomainEvent;
+use PcComponentes\TopicGenerator\Topic;
 use Shared\Domain\CompanyName;
 use Shared\Domain\ServiceName;
-use PcComponentes\TopicGenerator\Topic;
-use PcComponentes\Ddd\Domain\Model\DomainEvent;
-use IberdrolaApi\ChargePoint\Domain\Model\ChargePoint;
 
 final class ChargePointCreated extends DomainEvent implements ChargePointDomainEvent
 {
-    final public const string ID = 'id';
+    public const string ID = 'id';
     private const string NAME = 'created';
     private const string VERSION = '1';
 
