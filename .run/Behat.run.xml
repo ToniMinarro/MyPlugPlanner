@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Behat" type="PhpBehatConfigurationType">
+    <BehatRunner configuration_file="$PROJECT_DIR$/behat.yml" scenario="" scope="Yml" use_alternative_configuration_file="true" />
+    <CommandLine>
+      <PhpTestInterpreterSettings>
+        <option name="interpreterName" value="php-fpm" />
+      </PhpTestInterpreterSettings>
+      <envs>
+        <env name="XDEBUG_MODE" value="off" />
+      </envs>
+    </CommandLine>
+    <method v="2" />
+  </configuration>
+</component>
