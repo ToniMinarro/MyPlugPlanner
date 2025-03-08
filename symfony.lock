@@ -248,7 +248,7 @@
         ]
     },
     "symfony/stimulus-bundle": {
-        "version": "2.22",
+        "version": "2.23",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -289,7 +289,7 @@
         ]
     },
     "symfony/ux-turbo": {
-        "version": "2.22",
+        "version": "2.23",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -323,6 +323,6 @@
         ]
     },
     "twig/extra-bundle": {
-        "version": "v3.19.0"
+        "version": "v3.20.0"
     }
 }
