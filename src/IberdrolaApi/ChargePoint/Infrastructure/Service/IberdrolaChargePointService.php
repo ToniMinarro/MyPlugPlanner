@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace IberdrolaApi\ChargePoint\Infrastructure\Service;
 
-use Exception;
-use IberdrolaApi\ChargePoint\Domain\Service\ChargePointService;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use IberdrolaApi\ChargePoint\Domain\Service\ChargePointService;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 
 final readonly class IberdrolaChargePointService implements ChargePointService
 {
@@ -41,13 +43,22 @@ final readonly class IberdrolaChargePointService implements ChargePointService
                 throw new RuntimeException('Error al conectar con Iberdrola: ' . $request->getStatusCode());
             }
 
-            return json_decode(
+            $response = json_decode(
                 $request->getContent(),
                 true,
-                512,
-                JSON_THROW_ON_ERROR
             );
-        } catch (Exception|TransportExceptionInterface) {
+
+            if (!is_array($response)) {
+                return [];
+            }
+
+            return $response;
+        } catch (
+            ClientExceptionInterface
+            |ServerExceptionInterface
+            |TransportExceptionInterface
+            |RedirectionExceptionInterface
+        ) {
             return [];
         }
     }

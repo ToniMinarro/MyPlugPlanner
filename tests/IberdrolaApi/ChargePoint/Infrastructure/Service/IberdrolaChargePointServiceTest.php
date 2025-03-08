@@ -23,7 +23,7 @@ final class IberdrolaChargePointServiceTest extends TestCase
         $this->httpClientMock
             ->method('request')
             ->willReturn(
-                $this->createOkResponseMock(
+                $this->createResponseMock(
                     $this->okResponseBody(),
                     Response::HTTP_OK,
                 ),
@@ -42,10 +42,29 @@ final class IberdrolaChargePointServiceTest extends TestCase
         $this->httpClientMock
             ->method('request')
             ->willReturn(
-                $this->createOkResponseMock(
+                $this->createResponseMock(
                     $this->badResponseBody(),
                     Response::HTTP_BAD_REQUEST,
                 ),
+            );
+
+        self::expectException(\RuntimeException::class);
+
+        $chargePointInfo = $this->service->getChargePointInfo(1);
+
+        $this->assertIsArray($chargePointInfo);
+        $this->assertEmpty($chargePointInfo);
+        $this->assertEquals($expectedResponseBody, $chargePointInfo);
+    }
+
+    public function testGetChargePointInfoBadResponse2()
+    {
+        $expectedResponseBody = [];
+
+        $this->httpClientMock
+            ->method('request')
+            ->willReturn(
+                $this->createBadResponseMock(),
             );
 
         $chargePointInfo = $this->service->getChargePointInfo(1);
@@ -55,7 +74,24 @@ final class IberdrolaChargePointServiceTest extends TestCase
         $this->assertEquals($expectedResponseBody, $chargePointInfo);
     }
 
-    private function createOkResponseMock(array $responseBody, int $statusCode): ResponseInterface
+    public function testGetChargePointInfoServerErrorResponse()
+    {
+        $expectedResponseBody = [];
+
+        $this->httpClientMock
+            ->method('request')
+            ->willThrowException(new \Exception());
+
+        self::expectException(\Exception::class);
+
+        $chargePointInfo = $this->service->getChargePointInfo(1);
+
+        $this->assertIsArray($chargePointInfo);
+        $this->assertEmpty($chargePointInfo);
+        $this->assertEquals($expectedResponseBody, $chargePointInfo);
+    }
+
+    private function createResponseMock(array $responseBody, int $statusCode): ResponseInterface
     {
         $responseMock = $this->createMock(ResponseInterface::class);
         $responseMock->method('getStatusCode')->willReturn($statusCode);
@@ -63,6 +99,18 @@ final class IberdrolaChargePointServiceTest extends TestCase
         $responseMock
             ->method('getContent')
             ->willReturn(json_encode($responseBody));
+
+        return $responseMock;
+    }
+
+    private function createBadResponseMock(): ResponseInterface
+    {
+        $responseMock = $this->createMock(ResponseInterface::class);
+        $responseMock->method('getStatusCode')->willReturn(Response::HTTP_OK);
+
+        $responseMock
+            ->method('getContent')
+            ->willReturn('null');
 
         return $responseMock;
     }

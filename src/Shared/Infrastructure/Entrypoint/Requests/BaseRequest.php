@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace Shared\Infrastructure\Entrypoint\Requests;
 
 use JsonSerializable;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-abstract readonly class BaseRequest implements JsonSerializable
+abstract class BaseRequest implements JsonSerializable
 {
     public function __construct(
-        private Request $request,
-        private ValidatorInterface $validator,
+        private readonly Request $request,
+        private readonly ValidatorInterface $validator,
     ) {
         $this->populate();
         if ($this->autoValidateRequest()) {
@@ -24,7 +24,11 @@ abstract readonly class BaseRequest implements JsonSerializable
 
     public function getPayload(): array
     {
-        return $this->jsonSerialize();
+        $serializedRequest = $this->jsonSerialize();
+
+        return is_array($serializedRequest)
+            ? $serializedRequest
+            : [];
     }
 
     public function autoValidateRequest(): bool
@@ -34,15 +38,18 @@ abstract readonly class BaseRequest implements JsonSerializable
 
     private function populate(): void
     {
+        $queryAttributes = $this->request->attributes->get('_route_params');
+        $queryAttributes = is_array($queryAttributes) ? $queryAttributes : [];
+
         $payload = array_merge(
-            $this->request->attributes->get('_route_params', []),
+            $queryAttributes,
             $this->request->query->all(),
             $this->request->request->all()
         );
 
         foreach ($payload as $property => $value) {
-            if (property_exists($this, $property)) {
-                $this->{$property} = $value;
+            if (property_exists($this, (string) $property)) {
+                $this->{(string) $property} = $value;
             }
         }
     }

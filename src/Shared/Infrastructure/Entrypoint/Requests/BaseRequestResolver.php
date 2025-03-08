@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Shared\Infrastructure\Entrypoint\Requests;
 
-use IberdrolaApi\ChargePoint\Domain\Model\IberdrolaApiRequestInterface;
-use Symfony\Component\HttpFoundation\Exception\BadRequestException;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
-use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 use function sprintf;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
+use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use IberdrolaApi\ChargePoint\Domain\Model\IberdrolaApiRequestInterface;
 
 final readonly class BaseRequestResolver implements ValueResolverInterface
 {
@@ -25,11 +25,20 @@ final readonly class BaseRequestResolver implements ValueResolverInterface
 
     public function resolve(Request $request, ArgumentMetadata $argument): iterable
     {
-        if (empty(array_intersect(class_implements($argument->getType()), self::ENABLED_FOR_CONTEXTS))) {
+        $classImplements = (array) class_implements(
+            (string) $argument->getType()
+        );
+
+        $requestInterfaceEnabledInfo = array_intersect(
+            $classImplements,
+            self::ENABLED_FOR_CONTEXTS,
+        );
+
+        if (empty($requestInterfaceEnabledInfo)) {
             return [];
         }
 
-        $className = $argument->getType();
+        $className = (string) $argument->getType();
         if (!class_exists($className)) {
             throw new BadRequestException(sprintf('Request class %s does not exist.', $className));
         }
