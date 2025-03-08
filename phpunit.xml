@@ -5,7 +5,7 @@
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          colors="true"
          bootstrap="config/bootstrap.php"
-         cacheResultFile="var/cache/test/.phpunit.result.cache"
+         cacheDirectory="var/cache/test/.phpunit.cache"
 >
     <php>
         <ini name="display_errors" value="1" />
@@ -13,7 +13,7 @@
         <server name="APP_ENV" value="test" force="true" />
         <server name="SHELL_VERBOSITY" value="-1" />
         <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
-        <server name="SYMFONY_PHPUNIT_VERSION" value="9.5" />
+        <server name="SYMFONY_PHPUNIT_VERSION" value="10.5" />
     </php>
 
     <testsuites>
@@ -22,23 +22,10 @@
         </testsuite>
     </testsuites>
 
-    <coverage processUncoveredFiles="true">
+    <source restrictNotices="true" restrictWarnings="true">
         <include>
-            <directory suffix=".php">src</directory>
+            <directory>src</directory>
         </include>
-        <report>
-            <clover outputFile="var/report/unit/clover/coverage.xml"/>
-            <html outputDirectory="var/report/html" lowUpperBound="35" highLowerBound="70"/>
-            <xml outputDirectory="var/report/coverage-xml"/>
-            <text outputFile="php://stdout" showOnlySummary="true"/>
-            <php outputFile="var/report/cov/unit.cov"/>
-        </report>
-    </coverage>
+    </source>
 
-    <listeners>
-        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
-    </listeners>
-
-    <extensions>
-    </extensions>
 </phpunit>
