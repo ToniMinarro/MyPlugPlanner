@@ -47,6 +47,9 @@ fix_rector:
 
 fix: fix_rector fix_style
 
+grumphp:
+	docker compose exec --user ${UID}:${GID} ${DOCKER_PHP_SERVICE} sh -c "XDEBUG_MODE=off grumphp run"
+
 cache-clear:
 	docker compose run --rm -u ${0}:${0} ${DOCKER_PHP_SERVICE} sh -c "php bin/console cache:clear"
 

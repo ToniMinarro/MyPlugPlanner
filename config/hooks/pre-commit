@@ -1,0 +1,10 @@
+#!/bin/sh
+
+UID=$(id -u)
+GID=$(id -g)
+DOCKER_PHP_SERVICE=php-fpm
+
+SCRIPT=$(docker compose exec --user "${UID}:${GID}" ${DOCKER_PHP_SERVICE} sh -c "XDEBUG_MODE=off grumphp git:pre-commit" 2>&1)
+STATUS=$?
+echo "$SCRIPT"
+exit $STATUS

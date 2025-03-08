@@ -1,0 +1,27 @@
+grumphp:
+    process_timeout: 180
+    ascii:
+        failed:
+            - config/hooks/ko.txt
+        succeeded:
+            - config/hooks/ok.txt
+    tasks:
+        composer:
+            strict: true
+        jsonlint: ~
+        phpstan_shell:
+            metadata:
+                label: phpstan
+                task: shell
+            scripts:
+                - ["-c", "phpstan analyse -l 9 src tests"]
+        phpunit: ~
+        behat:
+            config: ~
+            format: progress
+            stop_on_failure: true
+        phpversion:
+            project: '8.4'
+        securitychecker_composeraudit:
+            format: plain
+            run_always: true

@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace IberdrolaApi\Tests\ChargePoint\Infrastructure\Service;
 
 use PHPUnit\Framework\TestCase;

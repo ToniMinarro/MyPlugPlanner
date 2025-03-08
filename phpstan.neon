@@ -1,8 +1,13 @@
+includes:
+  - vendor/phpstan/phpstan-symfony/extension.neon
 parameters:
-    level: 6
-    paths:
-        - bin/
-        - config/
-        - public/
-        - src/
-        - tests/
+  level: 9
+  customRulesetUsed: true
+  ignoreErrors:
+    - identifier: missingType.iterableValue
+  checkBenevolentUnionTypes: true
+  excludePaths:
+    - %rootDir%/../../../tests/*
+    - %rootDir%/../../../public/*
+    - %rootDir%/../../../config/*
+    - %rootDir%/../../../migrations/*

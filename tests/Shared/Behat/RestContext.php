@@ -6,15 +6,15 @@ namespace Shared\Tests\Behat;
 
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpFoundation\Request;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
-use Symfony\Component\HttpKernel\KernelInterface;
 use PcComponentes\OpenApiMessagingContext\Utils\RequestHistory;
 
 final readonly class RestContext implements Context
 {
     public function __construct(
-        private KernelInterface $kernel,
+        private Kernel $kernel,
         private RequestHistory $requestHistory
     ) {
     }
@@ -66,17 +66,10 @@ final readonly class RestContext implements Context
         $keyValues = [];
 
         foreach ($parameters as $key => $value) {
-            $keyValues[] = $key . '=' . $value;
+            $keyValues[] =  "$key=$value";
         }
 
         $this->sendARequestTo($method, $uri . '?' . \implode('&', $keyValues));
-    }
-
-    private function assertUri(string $uri): void
-    {
-        if ($uri === '') {
-            throw new \RuntimeException('Provide root path is required. Add "/" to URI.');
-        }
     }
 
     /**
@@ -121,6 +114,9 @@ final readonly class RestContext implements Context
     public function assertJsonResponse(PyStringNode $expected): void
     {
         $response = $this->requestHistory->getLastResponse()->getContent();
+        if (!$response) {
+            throw new \RuntimeException('No response received');
+        }
 
         $message = 'The JSON response is not the expected';
 

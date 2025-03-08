@@ -5,12 +5,8 @@ services:
 
     Shared\Tests\Behat\:
         resource: '../tests/Shared/Behat/*'
-
-    Shared\Kernel:
-        class: Shared\Kernel
-        arguments:
-            $environment: 'test'
-            $debug: true
+        bind:
+            Symfony\Component\HttpKernel\Kernel $kernel: '@kernel'
 
     PcComponentes\OpenApiMessagingContext\Utils\RequestHistory:
         class: PcComponentes\OpenApiMessagingContext\Utils\RequestHistory

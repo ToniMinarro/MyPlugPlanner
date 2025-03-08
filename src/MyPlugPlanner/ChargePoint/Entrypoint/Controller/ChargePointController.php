@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace MyPlugPlanner\ChargePoint\Entrypoint\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route(path: '/charge-point', name: 'charge_point_')]
 class ChargePointController extends AbstractController
