@@ -11,6 +11,7 @@ use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
 use Rector\Php80\Rector\Switch_\ChangeSwitchToMatchRector;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
+use Rector\Symfony\CodeQuality\Rector\Class_\InlineClassRoutePrefixRector;
 use Rector\Symfony\Set\SymfonySetList;
 use Rector\ValueObject\PhpVersion;
 
@@ -49,6 +50,7 @@ return static function (RectorConfig $rectorConfig): void {
         ChangeSwitchToMatchRector::class,
         NewlineAfterStatementRector::class,
         RemoveExtraParametersRector::class,
+        InlineClassRoutePrefixRector::class,
         ClassPropertyAssignToConstructorPromotionRector::class,
     ]);
 };
