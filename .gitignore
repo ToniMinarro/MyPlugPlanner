@@ -7,10 +7,6 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
-###> symfony/asset-mapper ###
-/public/assets/
-/assets/vendor/
-###< symfony/asset-mapper ###
 /jwt_public_key
 /jwt_secret_key
 /composer.phar
@@ -21,3 +17,8 @@
 /.phpunit.cache/
 ###< phpunit/phpunit ###
 /node_modules/
+
+###> symfony/asset-mapper ###
+/public/assets/
+/assets/vendor/
+###< symfony/asset-mapper ###
