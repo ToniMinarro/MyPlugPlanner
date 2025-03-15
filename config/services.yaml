@@ -34,6 +34,7 @@ services:
             - '../src/IberdrolaApi/Kernel.php'
         bind:
             Symfony\Contracts\HttpClient\HttpClientInterface $iberdrolaApiClient: '@iberdrola.api.client'
+            Symfony\Contracts\HttpClient\HttpClientInterface $iberdrolaPublicApiClient: '@iberdrola.public-api.client'
 
     iberdrola.api.client:
         class: Symfony\Component\HttpClient\HttpClient
@@ -41,6 +42,21 @@ services:
         arguments:
             $defaultOptions:
                 base_uri: '%env(IBERDROLA_API_URL)%'
+                http_version: '1.1'
+                headers:
+                    Accept: 'application/json'
+                    Content-Type: 'application/json'
+                    Authorization: '%env(IBERDROLA_API_KEY)%'
+                    Plataforma: 'Android'
+                    versionApp: 'ANDROID-4.28.10'
+                    User-Agent: 'Iberdrola/4.28.10/Dalvik/2.1.0 (Linux; U; Android 13; M2101K6G Build/TKQ1.221013.002)'
+
+    iberdrola.public-api.client:
+        class: Symfony\Component\HttpClient\HttpClient
+        factory: [ Symfony\Component\HttpClient\HttpClient, 'create' ]
+        arguments:
+            $defaultOptions:
+                base_uri: '%env(IBERDROLA_PUBLIC_API_URL)%'
                 http_version: '1.1'
                 headers:
                     Accept: 'application/json'

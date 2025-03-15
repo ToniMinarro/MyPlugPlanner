@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace IberdrolaApi\ChargePoint\Domain\Model;
+namespace IberdrolaApi\Shared\Entrypoint\Requests;
 
 interface IberdrolaApiRequestInterface
 {

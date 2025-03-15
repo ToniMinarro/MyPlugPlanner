@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace IberdrolaApi\ChargePoint\Entrypoint\Controller;
+namespace IberdrolaApi\Charge\Entrypoint\Controller;
 
-use IberdrolaApi\ChargePoint\Application\GetInfo\GetInfoQuery;
-use IberdrolaApi\ChargePoint\Entrypoint\Requests\ChargePoint\GetInfoRequest;
+use IberdrolaApi\Charge\Application\List\ListChargesQuery;
 use PcComponentes\Ddd\Domain\Model\ValueObject\Uuid;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -14,8 +13,8 @@ use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route(path: '/iberdrola-api/v1/charge-point', name: 'api_charge_point_')]
-class ChargePointController extends AbstractController
+#[Route(path: '/iberdrola-api/v1/charge', name: 'api_charge_')]
+class ChargeController extends AbstractController
 {
     use HandleTrait;
 
@@ -24,12 +23,11 @@ class ChargePointController extends AbstractController
         $this->messageBus = $executeQueryMessage;
     }
 
-    #[Route(path: '/{chargePointId}', name: 'get_info', methods: ['GET'])]
-    public function getInfo(GetInfoRequest $request): JsonResponse
+    #[Route(path: '/list', name: 'list_charges', methods: ['GET'])]
+    public function listCharges(): JsonResponse
     {
-        $query = GetInfoQuery::fromPayload(Uuid::v4(), $request->getPayload());
+        $query = ListChargesQuery::fromPayload(Uuid::v4(), []);
         $response = $this->handle($query);
-
         return new JsonResponse($response, Response::HTTP_OK);
     }
 }

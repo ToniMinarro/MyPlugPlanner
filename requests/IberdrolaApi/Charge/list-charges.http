@@ -1,0 +1,2 @@
+### LIST CHARGES
+GET {{host}}/iberdrola-api/v1/charge/list

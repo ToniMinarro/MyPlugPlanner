@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Shared\Infrastructure\Entrypoint\Requests;
 
-use function sprintf;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
+use IberdrolaApi\Shared\Entrypoint\Requests\IberdrolaApiRequestInterface;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
-use IberdrolaApi\ChargePoint\Domain\Model\IberdrolaApiRequestInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use function sprintf;
 
 final readonly class BaseRequestResolver implements ValueResolverInterface
 {

@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace IberdrolaApi\ChargePoint\Domain\Model;
 
-use IberdrolaApi\ChargePoint\Domain\Model\Event\ChargePointCreated;
-use IberdrolaApi\ChargePoint\Domain\Model\ValueObject\Id;
-use PcComponentes\Ddd\Domain\Model\ValueObject\DateTimeValueObject;
+use Shared\Domain\Model\DomainModel;
 use PcComponentes\Ddd\Domain\Model\ValueObject\Uuid;
 use PcComponentes\Ddd\Util\Message\ValueObject\AggregateId;
-use Shared\Domain\Model\DomainModel;
+use IberdrolaApi\ChargePoint\Domain\Model\Event\ChargePointCreated;
+use PcComponentes\Ddd\Domain\Model\ValueObject\DateTimeValueObject;
 
 final class ChargePoint extends DomainModel
 {
@@ -17,19 +16,19 @@ final class ChargePoint extends DomainModel
     private const string NAME = 'charge-point';
 
     protected function __construct(
-        private(set) readonly Id $id,
+        private(set) readonly int $id,
     ) {
         parent::__construct();
     }
 
-    public static function create(Id $id): self
+    public static function create(int $id): self
     {
         $chargePoint = new self($id);
 
         $chargePoint->recordThat(
             ChargePointCreated::fromPayload(
                 Uuid::v4(),
-                AggregateId::from((string) $chargePoint->id()->value()),
+                AggregateId::from((string) $chargePoint->id()),
                 DateTimeValueObject::now(),
                 [
                     ChargePointCreated::ID => $chargePoint->id(),
@@ -47,7 +46,7 @@ final class ChargePoint extends DomainModel
         return new self($id);
     }
 
-    public function id(): Id
+    public function id(): int
     {
         return $this->id;
     }
