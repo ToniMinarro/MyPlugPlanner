@@ -2,6 +2,10 @@ my_plug_planner_controllers:
     resource: '../src/MyPlugPlanner/ChargePoint/Entrypoint/Controller'
     type: attribute
 
+iberdrola_api_shared_controller:
+    resource: '../src/IberdrolaApi/Shared/Entrypoint/Controller'
+    type: attribute
+
 iberdrola_api_charge_controller:
     resource: '../src/IberdrolaApi/Charge/Entrypoint/Controller'
     type: attribute
