@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace IberdrolaApi\ChargePoint\Application\GetInfo;
 
-use IberdrolaApi\ChargePoint\Domain\Service\ChargePointService;
+use IberdrolaApi\Shared\Domain\Service\ChargePointService;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
 readonly class GetInfoHandler
 {
     public function __construct(
-        private ChargePointService $chargePointService
+        private ChargePointService $chargePointService,
     ) {
     }
 

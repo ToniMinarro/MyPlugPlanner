@@ -46,9 +46,8 @@ services:
                 headers:
                     Accept: 'application/json'
                     Content-Type: 'application/json'
-                    Authorization: '%env(IBERDROLA_API_KEY)%'
                     Plataforma: 'Android'
-                    versionApp: 'ANDROID-4.28.10'
+                    versionApp: 'ANDROID-4.28.11'
                     User-Agent: 'Iberdrola/4.28.10/Dalvik/2.1.0 (Linux; U; Android 13; M2101K6G Build/TKQ1.221013.002)'
 
     iberdrola.public-api.client:

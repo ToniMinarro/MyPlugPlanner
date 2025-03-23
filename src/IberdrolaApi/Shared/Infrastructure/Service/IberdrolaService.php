@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace IberdrolaApi\Shared\Infrastructure\Service;
 
-use IberdrolaApi\ChargePoint\Domain\Service\ChargePointService;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+use IberdrolaApi\Shared\Domain\Service\ChargePointService;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use function is_array;
 
 final readonly class IberdrolaService implements ChargePointService
@@ -21,6 +21,7 @@ final readonly class IberdrolaService implements ChargePointService
     private const string LIST_CHARGES_ENDPOINT = '/vecomges/api/appuseroperation/getListMovements';
 
     public function __construct(
+        private OAuthTokenManager $tokenManager,
         private HttpClientInterface $iberdrolaApiClient,
         private HttpClientInterface $iberdrolaPublicApiClient
     ) {
@@ -69,10 +70,21 @@ final readonly class IberdrolaService implements ChargePointService
     public function listCharges(): array
     {
         try {
+            $accessToken = $this->tokenManager->getAccessToken();
+            if (!$accessToken || !is_string($accessToken)) {
+                return [
+                    'No se pudo obtener un access token. Requiere autenticación.',
+                    Response::HTTP_UNAUTHORIZED
+                ];
+            }
+
             $request = $this->iberdrolaApiClient->request(
                 Request::METHOD_POST,
                 self::LIST_CHARGES_ENDPOINT,
                 [
+                    'headers' => [
+                        'Authorization' => sprintf('Bearer %s', $accessToken),
+                    ],
                     'json' => [
                         'invoiceAvailable' => false,
                         'movementList' => [],

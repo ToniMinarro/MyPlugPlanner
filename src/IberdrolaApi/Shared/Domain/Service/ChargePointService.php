@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace IberdrolaApi\ChargePoint\Domain\Service;
+namespace IberdrolaApi\Shared\Domain\Service;
 
 interface ChargePointService
 {

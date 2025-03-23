@@ -30,7 +30,7 @@ class OAuthController extends AbstractController
             'clientId-scope' => 'RVZBQVBQOk5EaWFlMjlUR3NqMG9pcDluTms3emRKV00xWkxRWStOV1FHOUszWW5kMGREbDZ0MTFYL0FaMDFGYlQ4UllxNlFzUk1GbERURExpNjU1WjFjQk04SjAvc0lYQUMwV0RUTUl6cUZKZVFRTGhRbXI5NGVYWHVrYWlNPQ==_YW50b25pb19qb3NlOTFAaG90bWFpbC5lczowMVNZMFNBbm1pNzE1Ng==',
             'redirect_uri' => 'https://www.iberdrola.es',
             'state' => '11',
-            'versionApp' => 'ANDROID-4.28.10',
+            'versionApp' => 'ANDROID-4.28.11',
             'Plataforma' => 'Android',
             'User-Agent' => 'Iberdrola/4.28.10/Dalvik/2.1.0 (Linux; U; Android 13; M2101K6G Build/TKQ1.221013.002)',
             'Accept' => 'application/json',
@@ -57,7 +57,7 @@ class OAuthController extends AbstractController
 
         $accessTokenUrl = 'https://acc.iberdrola.com/wscoauth/oauth/access_token';
         $headersToken = [
-            'versionApp' => 'ANDROID-4.28.10',
+            'versionApp' => 'ANDROID-4.28.11',
             'Plataforma' => 'Android',
             'User-Agent' => 'Iberdrola/4.28.10/Dalvik/2.1.0 (Linux; U; Android 13; M2101K6G Build/TKQ1.221013.002)',
             'Accept' => 'application/json',
@@ -126,7 +126,7 @@ class OAuthController extends AbstractController
 
         $accessTokenUrl = 'https://acc.iberdrola.com/wscoauth/oauth/access_token';
         $headers = [
-            'versionApp' => 'ANDROID-4.28.10',
+            'versionApp' => 'ANDROID-4.28.11',
             'Plataforma' => 'Android',
             'User-Agent' => 'Iberdrola/4.28.10/Dalvik/2.1.0 (Linux; U; Android 13; M2101K6G Build/TKQ1.221013.002)',
             'Accept' => 'application/json',

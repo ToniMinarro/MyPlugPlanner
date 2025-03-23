@@ -7,13 +7,14 @@ namespace IberdrolaApi\Shared\Infrastructure\Service;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-final class OAuthTokenManager
+readonly class OAuthTokenManager
 {
-    private int $refreshThreshold = 60;
+    private const int REFRESH_THRESHOLD = 60;
+    private const string ACCESS_TOKEN_URL = 'https://acc.iberdrola.com/wscoauth/oauth/access_token';
 
     public function __construct(
-        private readonly RequestStack $requestStack,
-        private readonly HttpClientInterface $client,
+        private RequestStack $requestStack,
+        private HttpClientInterface $client,
     ) {
     }
 
@@ -22,7 +23,7 @@ final class OAuthTokenManager
         $accessToken = $this->requestStack->getSession()->get('access_token');
         $expiresAt = $this->requestStack->getSession()->get('access_token_expires_at');
 
-        if ($accessToken && $expiresAt && $expiresAt > (time() + $this->refreshThreshold)) {
+        if ($accessToken && $expiresAt && $expiresAt > (time() + self::REFRESH_THRESHOLD)) {
             return $accessToken;
         }
 
@@ -38,9 +39,8 @@ final class OAuthTokenManager
             return null;
         }
 
-        $accessTokenUrl = 'https://acc.iberdrola.com/wscoauth/oauth/access_token';
         $headers = [
-            'versionApp' => 'ANDROID-4.28.10',
+            'versionApp' => 'ANDROID-4.28.11',
             'Plataforma' => 'Android',
             'User-Agent' => 'Iberdrola/4.28.10/Dalvik/2.1.0 (Linux; U; Android 13; M2101K6G Build/TKQ1.221013.002)',
             'Accept' => 'application/json',
@@ -58,7 +58,7 @@ final class OAuthTokenManager
             'refreshToken' => $refreshToken,
         ];
 
-        $response = $this->client->request('POST', $accessTokenUrl, [
+        $response = $this->client->request('POST', self::ACCESS_TOKEN_URL, [
             'headers' => $headers,
             'json' => $payload,
         ]);

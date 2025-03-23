@@ -2,28 +2,30 @@
 
 declare(strict_types=1);
 
-namespace IberdrolaApi\Tests\ChargePoint\Infrastructure\Service;
+namespace IberdrolaApi\Shared\Infrastructure\Service;
 
-use IberdrolaApi\ChargePoint\Domain\Service\ChargePointService;
-use IberdrolaApi\Shared\Infrastructure\Service\IberdrolaService;
-use PHPUnit\Framework\TestCase;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Symfony\Contracts\HttpClient\ResponseInterface;
 use Exception;
 use RuntimeException;
+use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\HttpClient\ResponseInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+use IberdrolaApi\Shared\Domain\Service\ChargePointService;
 
-final class IberdrolaChargePointServiceTest extends TestCase
+final class IberdrolaServiceTest extends TestCase
 {
     private ChargePointService $service;
+    private OAuthTokenManager $tokenManager;
     private HttpClientInterface $httpClientMock;
 
     protected function setup(): void
     {
         parent::setUp();
 
+        $this->tokenManager = $this->createMock(OAuthTokenManager::class);
         $this->httpClientMock = $this->createMock(HttpClientInterface::class);
         $this->service = new IberdrolaService(
+            $this->tokenManager,
             $this->httpClientMock,
             $this->httpClientMock,
         );
@@ -32,6 +34,10 @@ final class IberdrolaChargePointServiceTest extends TestCase
     public function test_get_charge_point_info_ok_response(): void
     {
         $expectedResponseBody = $this->okResponseBody();
+
+        $this->tokenManager
+            ->expects($this->never())
+            ->method('getAccessToken');
 
         $this->httpClientMock
             ->method('request')
@@ -51,6 +57,10 @@ final class IberdrolaChargePointServiceTest extends TestCase
     public function test_get_charge_point_info_bad_response(): void
     {
         $expectedResponseBody = [];
+
+        $this->tokenManager
+            ->expects($this->never())
+            ->method('getAccessToken');
 
         $this->httpClientMock
             ->method('request')
@@ -74,6 +84,10 @@ final class IberdrolaChargePointServiceTest extends TestCase
     {
         $expectedResponseBody = [];
 
+        $this->tokenManager
+            ->expects($this->never())
+            ->method('getAccessToken');
+
         $this->httpClientMock
             ->method('request')
             ->willReturn(
@@ -90,6 +104,10 @@ final class IberdrolaChargePointServiceTest extends TestCase
     public function test_get_charge_point_info_server_error_response(): void
     {
         $expectedResponseBody = [];
+
+        $this->tokenManager
+            ->expects($this->never())
+            ->method('getAccessToken');
 
         $this->httpClientMock
             ->method('request')

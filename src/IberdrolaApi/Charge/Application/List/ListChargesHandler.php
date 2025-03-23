@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace IberdrolaApi\Charge\Application\List;
 
+use IberdrolaApi\Shared\Domain\Service\ChargePointService;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
-use IberdrolaApi\ChargePoint\Domain\Service\ChargePointService;
 use IberdrolaApi\Charge\Domain\Service\ListChargesResponseTransformer;
 
 #[AsMessageHandler]
