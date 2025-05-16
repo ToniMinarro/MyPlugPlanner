@@ -59,4 +59,4 @@ RUN chown -R www-data:www-data $PROJECT_DIR && \
     rm -rf docker tests .env.test grumphp.yml phpcs.xml.dist phpstan.neon phpunit.xml.dist
 
 USER www-data
-RUN composer install --optimize-autoloader --no-scripts
+RUN composer install --no-dev --optimize-autoloader --no-scripts

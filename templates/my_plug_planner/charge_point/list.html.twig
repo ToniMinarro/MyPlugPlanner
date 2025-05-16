@@ -8,6 +8,23 @@
     <h1>Charge Point List</h1>
 
     <ul>
-        <li><a href="{{ path('charge_point_get_info', { chargePointId: 98756 }) }}">Santa Quiteria - Calle Lorca</a></li>
+        <li>
+            <a
+                href="{{ path('charge_point_get_info', { chargePointId: 98756 }) }}"
+                data-controller="hello"
+                data-action="hello#greet"
+            >
+                Santa Quiteria – Calle Lorca
+            </a>
+
+        </li>
     </ul>
+
+    <h1>Prueba Stimulus</h1>
+    <a href="{{ path('charge_point_get_info', { chargePointId: 98756 }) }}"
+       data-controller="hello"
+       data-action="click->hello#greet"
+       data-turbo="false">
+        Pulsa aquí
+    </a>
 {% endblock %}
