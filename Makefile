@@ -3,6 +3,9 @@ GID=$(shell id -g)
 DOCKER_PHP_SERVICE=php-fpm
 PHP_ONLY_CHANGED_FILES := $(shell git diff --diff-filter=d --name-only HEAD | grep '.php')
 
+SCRIPT_NAME = ChargePointMonitor.sh
+LOG_FILE = /tmp/charge_point_monitor.log
+
 start: erase cache-folders build composer-install up
 
 erase:
@@ -86,3 +89,19 @@ test_unit_coverage:
 
 behat:
 	docker-compose exec --user=${UID} ${DOCKER_PHP_SERVICE} sh -c "XDEBUG_MODE=off ./vendor/bin/behat --colors"
+
+# Inicia el script en segundo plano
+monitor-start:
+	@echo "Iniciando $(SCRIPT_NAME)..."
+	@nohup ./$(SCRIPT_NAME) > $(LOG_FILE) 2>&1 & echo $$! > /tmp/$(SCRIPT_NAME).pid
+	@echo "Ejecutando en segundo plano (PID: $$(cat /tmp/$(SCRIPT_NAME).pid))"
+
+# Detiene todas las instancias del script
+monitor-stop:
+	@echo "Deteniendo $(SCRIPT_NAME)..."
+	@./$(SCRIPT_NAME) --stop
+
+# Muestra los logs en tiempo real
+monitor-logs:
+	@echo "Mostrando logs de $(SCRIPT_NAME)..."
+	@tail -f $(LOG_FILE)
