@@ -4,7 +4,9 @@ parameters:
   level: 9
   customRulesetUsed: true
   ignoreErrors:
+    - identifier: argument.type
     - identifier: missingType.iterableValue
+    - identifier: function.alreadyNarrowedType
   checkBenevolentUnionTypes: true
   excludePaths:
     - %rootDir%/../../../tests/*

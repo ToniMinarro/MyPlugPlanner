@@ -1,4 +1,15 @@
-<div data-controller="hello">
-    <h1>{{ chargePointId }}</h1>
-    <button data-action="click->hello#greet">Say Hello</button>
-</div>
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Charge Point Information
+{% endblock %}
+
+{% block body %}
+    <h1>Charge Point “{{ chargePointId }}”</h1>
+
+    <ul>
+        <li>ID: {{ chargePointId }}</li>
+        <li>Status: {{ chargePointId }}</li>
+        <li>Location: {{ chargePointId }}</li>
+    </ul>
+{% endblock %}

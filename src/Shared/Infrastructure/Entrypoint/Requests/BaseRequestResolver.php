@@ -25,9 +25,18 @@ final readonly class BaseRequestResolver implements ValueResolverInterface
 
     public function resolve(Request $request, ArgumentMetadata $argument): iterable
     {
-        $classImplements = (array) class_implements(
-            (string) $argument->getType()
-        );
+        $type = $argument->getType();
+
+        if (
+            !$type
+            || !is_string($type)
+            || !class_exists($type)
+            && !interface_exists($type)
+        ) {
+            return [];
+        }
+
+        $classImplements = class_implements($type);
 
         $requestInterfaceEnabledInfo = array_intersect(
             $classImplements,

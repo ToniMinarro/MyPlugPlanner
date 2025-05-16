@@ -91,6 +91,19 @@ test_unit_coverage:
 behat:
 	docker-compose exec --user=${UID} ${DOCKER_PHP_SERVICE} sh -c "XDEBUG_MODE=off ./vendor/bin/behat --colors"
 
+fixAssets:
+	@echo "Creando symlinks individuales en public/ para las carpetas de assets..."
+
+	@for dir in css js plugins media styles; do \
+		if [ -L public/$$dir ]; then \
+			echo "Symlink ya existe: public/$$dir"; \
+		elif [ -e public/$$dir ]; then \
+			echo "ERROR: public/$$dir ya existe como carpeta o archivo. Elimínalo manualmente para crear el symlink."; \
+		else \
+			ln -s ../assets/$$dir public/$$dir && echo "Symlink creado: public/$$dir -> ../assets/$$dir"; \
+		fi \
+	done
+
 # Inicia el script en segundo plano
 monitor-start:
 	@echo "Iniciando $(SCRIPT_NAME)..."
