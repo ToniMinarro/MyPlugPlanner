@@ -6,14 +6,14 @@ WORKDIR $PROJECT_DIR
 RUN apk add --no-cache \
         bash libzip-dev libpng-dev openssl-dev postgresql-dev rabbitmq-c-dev ldb-dev libldap openldap-dev && \
     apk add --no-cache --virtual .build-deps $PHPIZE_DEPS && \
-    docker-php-ext-install -j$(nproc) pdo_pgsql pdo_mysql mysqli gd zip ldap && \
+    docker-php-ext-install -j$(nproc) pdo_pgsql pdo_mysql mysqli gd zip ldap amqp opcache && \
     pecl install amqp-1.11.0 && \
-    docker-php-ext-enable pdo_pgsql pdo_mysql mysqli amqp ldap && \
     apk del .build-deps && \
     rm -rf /tmp/pear
 
 COPY docker/php/config/www.conf /usr/local/etc/php-fpm.d/www.conf
 COPY docker/php/config/php_dev.ini /usr/local/etc/php/php.ini
+COPY docker/php/config/opcache_dev.ini /usr/local/etc/php/opcache.ini
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
