@@ -12,6 +12,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route(path: '/charge-point', name: 'charge_point_')]
 class ChargePointController extends AbstractController
 {
+    #[Route(path: '/list', name: 'list', methods: ['GET'])]
+    public function listView(): Response
+    {
+        return $this->render('my_plug_planner/charge_point/list.html.twig');
+    }
+
     #[Route(path: '/{chargePointId}', name: 'get_info', methods: ['GET'])]
     public function getInfoView(Request $request): Response
     {

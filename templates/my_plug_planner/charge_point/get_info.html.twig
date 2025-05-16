@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Charge Point “{{ chargePointId }}”</h1>
-
+    <h1>Charge Point {{ chargePointId }}</h1>
+    <a href="{{ path('charge_point_list') }}">Volver a lista</a>
     <ul>
         <li>ID: {{ chargePointId }}</li>
         <li>Status: {{ chargePointId }}</li>
