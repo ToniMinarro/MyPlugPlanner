@@ -7,10 +7,10 @@ SCRIPT_PATH = scripts
 SCRIPT_NAME = ChargePointMonitor.sh
 LOG_FILE = /tmp/charge_point_monitor.log
 
-start: erase cache-folders build composer-install up
+start: erase cache-folders build composer-install fixAssets up
 
 erase:
-	docker compose down -v
+	docker compose down -v --remove-orphans
 
 build:
 	docker compose build && \
@@ -94,7 +94,7 @@ behat:
 fixAssets:
 	@echo "Creando symlinks individuales en public/ para las carpetas de assets..."
 
-	@for dir in css js plugins media styles; do \
+	@for dir in controllers css js plugins media styles; do \
 		if [ -L public/$$dir ]; then \
 			echo "Symlink ya existe: public/$$dir"; \
 		elif [ -e public/$$dir ]; then \
