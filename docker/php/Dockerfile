@@ -4,7 +4,7 @@ ENV PATH $PROJECT_DIR/bin:$PROJECT_DIR/vendor/bin:$PATH
 WORKDIR $PROJECT_DIR
 
 RUN apk add --no-cache \
-        bash libzip-dev libpng-dev openssl-dev postgresql-dev rabbitmq-c-dev ldb-dev libldap openldap-dev && \
+        bash libzip-dev libpng-dev openssl-dev postgresql-dev rabbitmq-c-dev libldap openldap-dev && \
     apk add --no-cache --virtual .build-deps $PHPIZE_DEPS && \
     docker-php-ext-install -j$(nproc) pdo_pgsql pdo_mysql mysqli gd zip ldap opcache && \
     pecl install amqp-1.11.0 && \
