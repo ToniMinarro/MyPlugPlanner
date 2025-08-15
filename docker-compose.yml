@@ -1,58 +1,61 @@
 services:
-    mysql:
-        image: 'mysql:8.4'
-        volumes:
-            -  './docker/mysql/init:/docker-entrypoint-initdb.d'
-        command: --sql_mode=""
-        environment:
-            - MYSQL_ROOT_PASSWORD=password
-            - MYSQL_USER=admin
-            - MYSQL_PASSWORD=admin
-            - MYSQL_READONLY_USER=${DATABASE_USER_READONLY}
-            - MYSQL_READONLY_PASSWORD=${DATABASE_PASSWORD_READONLY}
-            - TZ=Europe/Madrid
-        ports:
-            - '47002:3306'
+  mysql:
+    image: yobasystems/alpine-mariadb:11.4.5-04-arm32v7
+    platform: linux/arm/v7
+    volumes:
+      - './docker/mysql/init:/docker-entrypoint-initdb.d'
+      - './docker/mysql/data:/var/lib/mysql'
+    command: --sql_mode=""
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+      - MYSQL_READONLY_USER=${DATABASE_USER_READONLY}
+      - MYSQL_READONLY_PASSWORD=${DATABASE_PASSWORD_READONLY}
+      - TZ=Europe/Madrid
+    ports:
+      - '47002:3306'
 
-    nginx:
-        build:
-            context: .
-            dockerfile: docker/nginx/Dockerfile
-            target: local-development
-        volumes:
-            - './public:/var/www/html/public'
-        ports:
-            - '47000:80'
+  nginx:
+    build:
+        context: .
+        dockerfile: docker/nginx/Dockerfile
+        target: local-development
+    volumes:
+        - './public:/var/www/html/public'
+    ports:
+        - '47000:80'
 
-    php-fpm:
-        build:
-            context: .
-            dockerfile: docker/php/Dockerfile
-            target: local
-        environment:
-            - XDEBUG_CONFIG=client_host=host.docker.internal
-            - PHP_IDE_CONFIG=serverName=Test
-            - COMPOSER_CACHE_DIR=/composer/cache
-        volumes:
-            - '.:/var/www/html'
-            - './var/cache/composer:/composer/cache'
-            - './docker/php/php-ini-overrides.ini:/etc/php/8.2/fpm/conf.d/99-overrides.ini'
-        extra_hosts:
-            - "host.docker.internal:host-gateway"
-        links:
-            -   mysql
+  php-fpm:
+    build:
+        context: .
+        dockerfile: docker/php/Dockerfile
+        target: local
+    environment:
+        - XDEBUG_CONFIG=client_host=host.docker.internal
+        - PHP_IDE_CONFIG=serverName=Test
+        - COMPOSER_CACHE_DIR=/composer/cache
+    volumes:
+        - '.:/var/www/html'
+        - './var/cache/composer:/composer/cache'
+        - './docker/php/php-ini-overrides.ini:/etc/php/8.2/fpm/conf.d/99-overrides.ini'
+    extra_hosts:
+        - "host.docker.internal:host-gateway"
+    links:
+        -   mysql
 
-    rabbitmq:
-        image: rabbitmq:3.7.3-management
-        volumes:
-            - ./docker/rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins
-            - rabbitmq-data:/var/lib/rabbitmq
-        environment:
-            RABBITMQ_DEFAULT_USER: "guest"
-            RABBITMQ_DEFAULT_PASS: "guest"
-        ports:
-            - '47004:5672'
-            - '47001:15672'
+  rabbitmq:
+    image: arm32v7/rabbitmq:3-management-alpine
+    platform: linux/arm/v7
+    volumes:
+      - ./docker/rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins
+      - rabbitmq-data:/var/lib/rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "guest"
+    ports:
+      - '47004:5672'
+      - '47001:15672'
 
 volumes:
     rabbitmq-data:

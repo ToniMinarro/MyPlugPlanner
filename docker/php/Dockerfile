@@ -1,4 +1,4 @@
-FROM php:8.4-fpm-alpine3.21 AS basic
+FROM php:8.4-fpm-alpine3.22 AS basic
 ENV PROJECT_DIR /var/www/html
 ENV PATH $PROJECT_DIR/bin:$PROJECT_DIR/vendor/bin:$PATH
 WORKDIR $PROJECT_DIR
