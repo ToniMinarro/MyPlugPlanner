@@ -2,8 +2,9 @@ FROM php:8.4-fpm-alpine3.22 AS basic
 
 ARG UID=1000
 ARG GID=1000
-RUN addgroup --gid $GID phpuser \
-    && adduser --disabled-password --gecos "" --uid $UID --gid $GID phpuser
+
+RUN addgroup -g ${GID} phpuser \
+    && adduser -D -u ${UID} -G phpuser phpuser
 
 ENV PROJECT_DIR=/var/www/html
 ENV PATH=$PROJECT_DIR/bin:$PROJECT_DIR/vendor/bin:$PATH
@@ -25,7 +26,7 @@ COPY docker/php/config/opcache_dev.ini /usr/local/etc/php/opcache.ini
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN mkdir -p $PROJECT_DIR/var/cache $PROJECT_DIR/var/log $PROJECT_DIR/vendor \
-    && chown -R $UID:$GID $PROJECT_DIR \
+    && chown -R phpuser:phpuser $PROJECT_DIR \
     && chmod -R 775 $PROJECT_DIR/var $PROJECT_DIR/vendor
 
 USER phpuser
@@ -46,7 +47,7 @@ COPY ./ $PROJECT_DIR
 COPY public.pem $PROJECT_DIR/config/jwt/public.pem
 COPY private.pem $PROJECT_DIR/config/jwt/private.pem
 
-RUN chown -R $UID:$GID $PROJECT_DIR \
+RUN chown -R phpuser:phpuser $PROJECT_DIR \
     && chmod -R 775 $PROJECT_DIR/var $PROJECT_DIR/vendor \
     && curl -LO https://github.com/DataDog/dd-trace-php/releases/download/1.5.1/datadog-setup.php \
     && php datadog-setup.php --php-bin=all
@@ -58,7 +59,7 @@ FROM local AS test
 ENV APP_ENV=dev
 COPY ./ $PROJECT_DIR
 RUN mkdir -p $PROJECT_DIR/var/cache $PROJECT_DIR/var/log $PROJECT_DIR/vendor \
-    && chown -R $UID:$GID $PROJECT_DIR \
+    && chown -R phpuser:phpuser $PROJECT_DIR \
     && chmod -R 775 $PROJECT_DIR/var $PROJECT_DIR/vendor
 
 RUN composer install --optimize-autoloader --no-scripts
@@ -75,7 +76,7 @@ COPY public.pem $PROJECT_DIR/config/jwt/public.pem
 COPY private.pem $PROJECT_DIR/config/jwt/private.pem
 
 RUN mkdir -p $PROJECT_DIR/var/cache $PROJECT_DIR/var/log $PROJECT_DIR/vendor \
-    && chown -R $UID:$GID $PROJECT_DIR \
+    && chown -R phpuser:phpuser $PROJECT_DIR \
     && chmod -R 775 $PROJECT_DIR/var $PROJECT_DIR/vendor \
     && rm -rf docker tests .env.test grumphp.yml phpcs.xml.dist phpstan.neon phpunit.xml.dist
 
