@@ -1,16 +1,22 @@
 FROM php:8.4-fpm-alpine3.22 AS basic
-ENV PROJECT_DIR /var/www/html
-ENV PATH $PROJECT_DIR/bin:$PROJECT_DIR/vendor/bin:$PATH
+
+ARG UID=1000
+ARG GID=1000
+RUN addgroup --gid $GID phpuser \
+    && adduser --disabled-password --gecos "" --uid $UID --gid $GID phpuser
+
+ENV PROJECT_DIR=/var/www/html
+ENV PATH=$PROJECT_DIR/bin:$PROJECT_DIR/vendor/bin:$PATH
 WORKDIR $PROJECT_DIR
 
 RUN apk add --no-cache \
-        bash libzip-dev libpng-dev openssl-dev postgresql-dev rabbitmq-c-dev libldap openldap-dev && \
-    apk add --no-cache --virtual .build-deps $PHPIZE_DEPS && \
-    docker-php-ext-install -j$(nproc) pdo_pgsql pdo_mysql mysqli gd zip ldap opcache && \
-    pecl install amqp-1.11.0 && \
-    docker-php-ext-enable pdo_pgsql pdo_mysql mysqli amqp ldap && \
-    apk del .build-deps && \
-    rm -rf /tmp/pear
+        bash libzip-dev libpng-dev openssl-dev postgresql-dev rabbitmq-c-dev libldap openldap-dev \
+    && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
+    && docker-php-ext-install -j$(nproc) pdo_pgsql pdo_mysql mysqli gd zip ldap opcache \
+    && pecl install amqp-1.11.0 \
+    && docker-php-ext-enable pdo_pgsql pdo_mysql mysqli amqp ldap \
+    && apk del .build-deps \
+    && rm -rf /tmp/pear
 
 COPY docker/php/config/www.conf /usr/local/etc/php-fpm.d/www.conf
 COPY docker/php/config/php_dev.ini /usr/local/etc/php/php.ini
@@ -19,17 +25,19 @@ COPY docker/php/config/opcache_dev.ini /usr/local/etc/php/opcache.ini
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN mkdir -p $PROJECT_DIR/var/cache $PROJECT_DIR/var/log $PROJECT_DIR/vendor \
-    && chown -R www-data:www-data $PROJECT_DIR \
+    && chown -R $UID:$GID $PROJECT_DIR \
     && chmod -R 775 $PROJECT_DIR/var $PROJECT_DIR/vendor
+
+USER phpuser
 
 # ──────────────────────────────────────────────────────────────
 FROM basic AS local
-RUN apk add --no-cache git linux-headers && \
-    apk add --no-cache --virtual .build-deps $PHPIZE_DEPS && \
-    pecl install xdebug 3 && \
-    docker-php-ext-enable xdebug && \
-    apk del .build-deps && \
-    rm -rf /usr/share/php7 /tmp/pear
+RUN apk add --no-cache git linux-headers \
+    && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
+    && pecl install xdebug 3 \
+    && docker-php-ext-enable xdebug \
+    && apk del .build-deps \
+    && rm -rf /usr/share/php7 /tmp/pear
 
 # ──────────────────────────────────────────────────────────────
 FROM basic AS development
@@ -38,12 +46,11 @@ COPY ./ $PROJECT_DIR
 COPY public.pem $PROJECT_DIR/config/jwt/public.pem
 COPY private.pem $PROJECT_DIR/config/jwt/private.pem
 
-RUN chown -R www-data:www-data $PROJECT_DIR \
+RUN chown -R $UID:$GID $PROJECT_DIR \
     && chmod -R 775 $PROJECT_DIR/var $PROJECT_DIR/vendor \
     && curl -LO https://github.com/DataDog/dd-trace-php/releases/download/1.5.1/datadog-setup.php \
     && php datadog-setup.php --php-bin=all
 
-USER www-data
 RUN composer install --optimize-autoloader --no-scripts
 
 # ──────────────────────────────────────────────────────────────
@@ -51,10 +58,9 @@ FROM local AS test
 ENV APP_ENV=dev
 COPY ./ $PROJECT_DIR
 RUN mkdir -p $PROJECT_DIR/var/cache $PROJECT_DIR/var/log $PROJECT_DIR/vendor \
-    && chown -R www-data:www-data $PROJECT_DIR \
+    && chown -R $UID:$GID $PROJECT_DIR \
     && chmod -R 775 $PROJECT_DIR/var $PROJECT_DIR/vendor
 
-USER www-data
 RUN composer install --optimize-autoloader --no-scripts
 
 # ──────────────────────────────────────────────────────────────
@@ -69,9 +75,8 @@ COPY public.pem $PROJECT_DIR/config/jwt/public.pem
 COPY private.pem $PROJECT_DIR/config/jwt/private.pem
 
 RUN mkdir -p $PROJECT_DIR/var/cache $PROJECT_DIR/var/log $PROJECT_DIR/vendor \
-    && chown -R www-data:www-data $PROJECT_DIR \
+    && chown -R $UID:$GID $PROJECT_DIR \
     && chmod -R 775 $PROJECT_DIR/var $PROJECT_DIR/vendor \
     && rm -rf docker tests .env.test grumphp.yml phpcs.xml.dist phpstan.neon phpunit.xml.dist
 
-USER www-data
 RUN composer install --no-dev --optimize-autoloader --no-scripts

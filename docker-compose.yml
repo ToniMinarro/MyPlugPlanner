@@ -18,33 +18,35 @@ services:
 
   nginx:
     build:
-        context: .
-        dockerfile: docker/nginx/Dockerfile
-        target: local-development
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+      target: local-development
     volumes:
-        - './public:/var/www/html/public'
-        - 'symfony_var:/var/www/html/var'
-        - 'symfony_vendor:/var/www/html/vendor'
+      - './public:/var/www/html/public'
     ports:
-        - '47000:80'
+      - '47000:80'
 
   php-fpm:
     build:
-        context: .
-        dockerfile: docker/php/Dockerfile
-        target: local
+      context: .
+      dockerfile: docker/php/Dockerfile
+      target: local
+      args:
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
     environment:
-        - XDEBUG_CONFIG=client_host=host.docker.internal
-        - PHP_IDE_CONFIG=serverName=Test
-        - COMPOSER_CACHE_DIR=/composer/cache
+      - XDEBUG_CONFIG=client_host=host.docker.internal
+      - PHP_IDE_CONFIG=serverName=Test
+      - COMPOSER_CACHE_DIR=/composer/cache
     volumes:
-        - '.:/var/www/html'
-        - './var/cache/composer:/composer/cache'
-        - './docker/php/php-ini-overrides.ini:/etc/php/8.2/fpm/conf.d/99-overrides.ini'
+      - '.:/var/www/html'
+      - './var/cache/composer:/composer/cache'
+      - './docker/php/php-ini-overrides.ini:/etc/php/8.2/fpm/conf.d/99-overrides.ini'
     extra_hosts:
-        - "host.docker.internal:host-gateway"
+      - "host.docker.internal:host-gateway"
     links:
-        -   mysql
+      - mysql
+    user: "${UID:-1000}:${GID:-1000}"
 
   rabbitmq:
     image: arm32v7/rabbitmq:3-management-alpine
@@ -60,6 +62,4 @@ services:
       - '47001:15672'
 
 volumes:
-    rabbitmq-data:
-    symfony_var:
-    symfony_vendor:
+  rabbitmq-data:
