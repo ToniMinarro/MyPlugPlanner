@@ -23,6 +23,8 @@ services:
         target: local-development
     volumes:
         - './public:/var/www/html/public'
+        - 'symfony_var:/var/www/html/var'
+        - 'symfony_vendor:/var/www/html/vendor'
     ports:
         - '47000:80'
 
@@ -59,3 +61,5 @@ services:
 
 volumes:
     rabbitmq-data:
+    symfony_var:
+    symfony_vendor:
