@@ -3,7 +3,7 @@ my_plug_planner_controllers:
     type: attribute
 
 iberdrola_api_shared_controller:
-    resource: '../src/IberdrolaApi/Shared/Entrypoint/Controller'
+    resource: '../src/Shared/Entrypoint/Controller'
     type: attribute
 
 iberdrola_api_charge_controller:
