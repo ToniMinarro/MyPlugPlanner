@@ -44,6 +44,15 @@ RUN apk add --no-cache git linux-headers \
     && apk del .build-deps \
     && rm -rf /usr/share/php7 /tmp/pear
 
+COPY ./ $PROJECT_DIR
+
+RUN composer install --optimize-autoloader
+
+RUN composer dump-autoload && \
+    bin/console assets:install public && \
+    bin/console importmap:install && \
+    bin/console asset-map:compile
+
 # ──────────────────────────────────────────────────────────────
 FROM basic AS development
 RUN apk add --no-cache git linux-headers
