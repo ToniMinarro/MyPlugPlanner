@@ -55,7 +55,7 @@ grumphp:
 	docker compose exec --user ${UID}:${GID} ${DOCKER_PHP_SERVICE} sh -c "XDEBUG_MODE=off grumphp run"
 
 cache-clear:
-	docker compose run --rm -u ${0}:${0} ${DOCKER_PHP_SERVICE} sh -c "XDEBUG_MODE=off php bin/console cache:clear"
+	docker compose run --rm -u ${UID}:${GID} ${DOCKER_PHP_SERVICE} sh -c "XDEBUG_MODE=off php bin/console cache:clear"
 
 consume-commands:
 	docker compose exec --user ${UID}:${GID} ${DOCKER_PHP_SERVICE} console messenger:consume commands_low --bus=execute_command.bus --limit=100 --time-limit=60 -vv

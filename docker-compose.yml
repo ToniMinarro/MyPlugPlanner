@@ -46,7 +46,6 @@ services:
       - "host.docker.internal:host-gateway"
     links:
       - mysql
-    user: "${UID:-1000}:${GID:-1000}"
 
   rabbitmq:
     image: arm32v7/rabbitmq:3-management-alpine
