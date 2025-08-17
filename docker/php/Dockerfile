@@ -37,7 +37,6 @@ CMD ["php-fpm"]
 
 # ──────────────────────────────────────────────────────────────
 FROM basic AS local
-USER phpuser
 RUN apk add --no-cache git linux-headers \
     && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
     && pecl install xdebug 3 \
@@ -47,7 +46,6 @@ RUN apk add --no-cache git linux-headers \
 
 # ──────────────────────────────────────────────────────────────
 FROM basic AS development
-USER phpuser
 RUN apk add --no-cache git linux-headers
 COPY ./ $PROJECT_DIR
 COPY public.pem $PROJECT_DIR/config/jwt/public.pem
@@ -62,7 +60,6 @@ RUN composer install --optimize-autoloader --no-scripts
 
 # ──────────────────────────────────────────────────────────────
 FROM local AS test
-USER phpuser
 ENV APP_ENV=dev
 COPY ./ $PROJECT_DIR
 RUN mkdir -p $PROJECT_DIR/var/cache $PROJECT_DIR/var/log $PROJECT_DIR/vendor \
@@ -73,7 +70,6 @@ RUN composer install --optimize-autoloader --no-scripts
 
 # ──────────────────────────────────────────────────────────────
 FROM basic AS production
-USER phpuser
 COPY docker/php/config/php_prod.ini /usr/local/etc/php/php.ini
 RUN curl -LO https://github.com/DataDog/dd-trace-php/releases/download/1.5.1/datadog-setup.php \
     && php datadog-setup.php --php-bin=all
